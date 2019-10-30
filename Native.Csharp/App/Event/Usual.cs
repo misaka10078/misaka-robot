@@ -10,6 +10,6 @@ namespace Native.Csharp.App.Event
     {
 
         public static string languagemod1_start = "您的小树枝提醒您：\r\n";
-        public static string languagemod1_over = "\r\n时间还能多，先一起来玩吧~";
+        public static string languagemod1_over = "\r\n时间还很多，先一起来玩吧~";
     }
 }
