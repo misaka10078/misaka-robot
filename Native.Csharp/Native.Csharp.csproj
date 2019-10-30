@@ -120,6 +120,8 @@
     <Compile Include="App\Event\Event_AppMain.cs" />
     <Compile Include="App\Event\Event_CqExit.cs" />
     <Compile Include="App\Event\Event_CqStartup.cs" />
+    <Compile Include="App\Event\Event_GroupMessage.cs" />
+    <Compile Include="App\Event\Usual.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repair\Core\Kernel32.cs" />
     <Compile Include="Repair\Enum\LoadLibraryFlags.cs" />

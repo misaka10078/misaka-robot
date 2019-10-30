@@ -61,10 +61,10 @@ namespace Native.Csharp.App.Core
 			Common.AppVersion = Version.Parse ("1.0.0");		
 
 			//
-			// 当前项目名称: Native.Csharp
+			// 当前项目名称: cn.misakalab.mbk
 			// Api版本: 9
 
-			return string.Format ("{0},{1}", 9, "Native.Csharp");
+			return string.Format ("{0},{1}", 9, "cn.misakalab.mbk");
 		}
 
 		/// <summary>
@@ -79,7 +79,7 @@ namespace Native.Csharp.App.Core
 			Common.CqApi = new CqApi (authCode);
 
 			// AuthCode 传递完毕后将对象加入容器托管, 以便在其它项目中调用
-			Common.UnityContainer.RegisterInstance<CqApi> ("Native.Csharp", Common.CqApi);
+			Common.UnityContainer.RegisterInstance<CqApi> ("cn.misakalab.mbk", Common.CqApi);
 
 			// 注册插件全局异常捕获回调, 用于捕获未处理的异常, 回弹给 酷Q 做处理
 			AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
