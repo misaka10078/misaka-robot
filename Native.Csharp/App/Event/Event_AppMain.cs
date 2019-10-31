@@ -38,7 +38,7 @@ namespace Native.Csharp.App.Event
             container.RegisterType<ICqAppDisable, Event_CqAppDisable> ("应用将被停用");
             // 将实现了接口的类注入到容器中, 并且注入的名称就为 Json 中使用的 "name" 字段
             container.RegisterType<IReceiveGroupMessage, Event_GroupMessage>("群消息处理");
-            container.RegisterType<IReceiveFriendMessage, Event_FriendMessage>("好友消息处理");
+            container.RegisterType<IReceiveFriendMessage, Event_FriendMessage>("私聊消息处理");
         }
 
 		/// <summary>

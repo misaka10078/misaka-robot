@@ -18,13 +18,18 @@ namespace Native.Csharp.App.Event
 		/// </summary>
 		/// <param name="sender">事件的触发对象</param>
 		/// <param name="e">事件的附加参数</param>
+        private Usual  classObj;
         public void CqAppEnable (object sender, CqAppEnableEventArgs e)
         {
             // 当应用被启用后，本方法将被调用。
             // 如果酷Q载入时应用已被启用，则在 ICqStartup 接口的实现方法被调用后，本方法也将被调用一次。
             // 如非必要，不建议在这里加载窗口。（可以添加菜单，让用户手动打开窗口）
             
-            Usual.Logdate= DateTime.Now.AddDays(-1);//初始化时记录当前时间并且减1天，达到立即触发报时的效果
+            Usual.Logdate= DateTime.Now;//初始化时记录当前时间
+            classObj = new Usual() ;
+            classObj.Trace_Output(Usual.Logdate.ToString());
+
+
 
         Common.IsRunning = true;
         }
