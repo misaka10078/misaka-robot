@@ -24,7 +24,10 @@ namespace Native.Csharp.App.Event
         {
             //Common.CqApi.SendPrivateMessage(403828602, Text);
         }
+        public void Shoulie_Image()
+        {
 
+        }
         
     }
 }

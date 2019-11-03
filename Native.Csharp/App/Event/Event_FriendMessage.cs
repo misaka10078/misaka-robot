@@ -1,8 +1,8 @@
 ﻿using Native.Csharp.Sdk.Cqp.EventArgs;
 using Native.Csharp.Sdk.Cqp.Interface;
 
+using System.Windows.Forms;
 
-using System;
 namespace Native.Csharp.App.Event
 {
     public class Event_FriendMessage : IReceiveFriendMessage
@@ -32,6 +32,9 @@ namespace Native.Csharp.App.Event
                 Usual.languagemod1_over = "\r\n"+ e.Message  ;
                 Common.CqApi.SendPrivateMessage(e.FromQQ, "报时语言更新成功");
             }
+            //Common.CqApi.SendPrivateMessage(e.FromQQ, e.Message.ToString());
+            //MessageBox.Show(e.Message.ToString());
+
         }
     }
 }
