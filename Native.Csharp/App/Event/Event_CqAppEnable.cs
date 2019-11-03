@@ -26,7 +26,7 @@ namespace Native.Csharp.App.Event
             // 如非必要，不建议在这里加载窗口。（可以添加菜单，让用户手动打开窗口）
             
             Usual.Logdate= DateTime.Now;//初始化时记录当前时间
-
+            Usual.Logdate = Usual.Logdate.AddDays(1);
             Usual.Logdate=Usual.Logdate.AddHours(-Usual.Logdate.Hour + 6);
             classObj = new Usual() ;
             classObj.Trace_Output(Usual.Logdate.ToString());
