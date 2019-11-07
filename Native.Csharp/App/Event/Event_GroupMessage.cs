@@ -18,8 +18,15 @@ namespace Native.Csharp.App.Event
                 //Usual.Logdate = Usual.Logdate.AddDays(1);//记录日期+1，以便在明天再次触发  
                 //Usual.Logdate = Usual.Logdate.AddHours(-Usual.Logdate.Hour + 6);//记录小时数设置为6点，就能在明天6点等待触发
                 Common.CqApi.SendGroupMessage(Usual.Test_GroupID, "极限玩耍倒计时"+ outdt.Days + "天，Mone的ID已经更新，今天也要加油哦~");
+                Usual.Mone_ID_day = outdt.Days;
                 //TestObj = new Usual();
                 //TestObj.Trace_Output(Usual.Logdate.ToString());
+            }
+
+            if(e.Message =="/更新ID")
+            {
+                Common.CqApi.SendGroupMessage(Usual.Test_GroupID, "极限玩耍倒计时" + outdt.Days + "天，Mone的ID已经更新，今天也要加油哦~");
+                Usual.Mone_ID_day = outdt.Days;
             }
 
             if (e.Message == "/催命")
