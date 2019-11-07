@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Native.Csharp.Sdk.Cqp.EventArgs;
 using Native.Csharp.Sdk.Cqp.Interface;
+using Native.Csharp.Sdk.Cqp.Model;
+
 
 namespace Native.Csharp.App.Event
 {
@@ -31,7 +33,13 @@ namespace Native.Csharp.App.Event
             classObj = new Usual() ;
             classObj.Trace_Output(Usual.Logdate.ToString());
 
-        Common.IsRunning = true;
+            GroupMemberInfo member = Common.CqApi.GetMemberInfo(262787331, 2366325788);
+            string txt = member.Nick.Substring(member.Nick.Length - 3);
+            Usual.Mone_ID_day = Convert.ToInt32(txt);//获取Mone的ID并截取后3位转化成日期
+
+
+
+            Common.IsRunning = true;
         }
     }
 }

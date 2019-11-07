@@ -18,6 +18,7 @@ namespace Native.Csharp.App.Event
         public static string languagemod1_start = "我亲爱的小树苗，你可爱的小树枝提醒你：\r\n";
         public static string languagemod1_over = "\r\n时间还有很多，一起来玩耍吧~Lahee";
 
+        public static int Mone_ID_day;//储存MONE的ID中的倒计时日期
 
 
         public void Trace_Output(string Text)
