@@ -9,7 +9,7 @@ namespace Native.Csharp.App.Event
         public void ReceiveGroupMessage(object sender, CqGroupMessageEventArgs e)
         {
             DateTime dt = DateTime.Now;
-            DateTime dtfinal = new DateTime(2020, 6, 7, 9, 0, 0);
+            DateTime dtfinal = new DateTime(2020, 6, 7, 0, 0, 0);
             TimeSpan outdt = dtfinal - dt;
             if (Usual.Mone_ID_day <outdt.Days)
             {
@@ -25,6 +25,7 @@ namespace Native.Csharp.App.Event
 
             if(e.Message =="/更新ID")
             {
+                Common.CqApi.SetGroupMemberNewCard(Usual.Test_GroupID, Usual.Test_MoneID, "极限玩耍：" + outdt.Days.ToString());
                 Common.CqApi.SendGroupMessage(Usual.Test_GroupID, "极限玩耍倒计时" + outdt.Days + "天，Mone的ID已经更新，今天也要加油哦~");
                 Usual.Mone_ID_day = outdt.Days;
             }
