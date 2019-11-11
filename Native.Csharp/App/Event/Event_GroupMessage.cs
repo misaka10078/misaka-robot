@@ -20,11 +20,12 @@ namespace Native.Csharp.App.Event
 
             if(e.Message =="/更新ID")
             {
-                Common.CqApi.SetGroupMemberNewCard(Usual.Test_GroupID, Usual.Test_MoneID, "极限玩耍：" + outdt.Days.ToString());
-                Common.CqApi.SendGroupMessage(Usual.Test_GroupID, "极限玩耍倒计时" + outdt.Days + "天，Mone的ID已经更新，今天也要加油哦~");
-                Usual.Mone_ID_day = outdt.Days;
+                RealUsual.Daliy_Fresh(outdt.Days);
             }
-
+            if(e.Message=="/一言")
+            {
+                Common.CqApi.SendGroupMessage(e.FromGroup, RealUsual.One_Word());
+            }
             if (e.Message == "/催命")
             {
                 var outputmessage = "距离2020高考还有" + outdt.Days + "天" +

@@ -132,6 +132,7 @@
     <Compile Include="Repair\ModuleInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".editorconfig" />
     <None Include="cn.misakalab.mbk.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
