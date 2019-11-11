@@ -32,13 +32,13 @@ namespace Native.Csharp.App.Event
             Usual.Logdate = Usual.Logdate.AddDays(1);
             Usual.Logdate=Usual.Logdate.AddHours(-Usual.Logdate.Hour + 6);
             classObj = new Usual() ;
-            classObj.Trace_Output(Usual.Logdate.ToString());
+            //classObj.Trace_Output(Usual.Logdate.ToString());
 
             GroupMemberInfo member = Common.CqApi.GetMemberInfo(Usual.Test_GroupID, Usual.Test_MoneID);
             string txt = member.Card.Substring(member.Card.Length - 3);
             //MessageBox.Show(txt);
             Usual.Mone_ID_day = Convert.ToInt32(txt);//获取Mone的ID并截取后3位转化成日期
-            
+            classObj.Trace_Output(Usual.Test_GroupID+txt);
 
 
             Common.IsRunning = true;

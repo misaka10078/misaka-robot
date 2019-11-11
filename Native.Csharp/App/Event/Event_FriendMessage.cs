@@ -32,6 +32,19 @@ namespace Native.Csharp.App.Event
                 Usual.languagemod1_over = "\r\n"+ e.Message  ;
                 Common.CqApi.SendPrivateMessage(e.FromQQ, "报时语言更新成功");
             }
+
+            if (e.Message =="/切换调试模式" && e.FromQQ == 403828602)
+            {
+                Usual.Trace_Enabled = !Usual.Trace_Enabled;
+                if (Usual.Trace_Enabled)
+                {
+                    Common.CqApi.SendPrivateMessage(e.FromQQ, "调试模式已开启");
+                }
+                else
+                {
+                    Common.CqApi.SendPrivateMessage(e.FromQQ, "调试模式已关闭");
+                }
+            }
             //Common.CqApi.SendPrivateMessage(e.FromQQ, e.Message.ToString());
             //MessageBox.Show(e.Message.ToString());
 
