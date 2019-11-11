@@ -11,6 +11,7 @@ namespace Native.Csharp.App.Event
             DateTime dt = DateTime.Now;
             DateTime dtfinal = new DateTime(2020, 6, 7, 0, 0, 0);
             TimeSpan outdt = dtfinal - dt;
+            //
             if (Usual.Mone_ID_day <outdt.Days)
             {
                 Common.CqApi.SetGroupMemberNewCard(Usual.Test_GroupID , Usual.Test_MoneID , "极限玩耍："+outdt.Days.ToString());
