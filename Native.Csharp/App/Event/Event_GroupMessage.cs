@@ -24,7 +24,7 @@ namespace Native.Csharp.App.Event
             }
             if(e.Message=="/一言")
             {
-                Common.CqApi.SendGroupMessage(e.FromGroup, RealUsual.One_Word());
+               // Common.CqApi.SendGroupMessage(e.FromGroup, RealUsual.One_Word());
             }
             if (e.Message == "/催命")
             {
@@ -45,11 +45,17 @@ namespace Native.Csharp.App.Event
 
 
 
-            //if(e.Message =="/狩猎")
-            //{   
+            if (e.Message == "/狩猎")
+            {
+                string Filename = RealUsual.Get_Image_Path(0);
+                Common.CqApi.SendGroupMessage(e.FromGroup, Common.CqApi.CqCode_Image(Filename));
+            }
 
-               // Common.CqApi.SendGroupMessage(e.FromGroup, Common.CqApi.CqCode_Image("狩猎\\1.jpg"));
-           // }
+            if(e.Message == "/药水哥")
+            {
+                string Filename = RealUsual.Get_Image_Path(1);
+                Common.CqApi.SendGroupMessage(e.FromGroup, Common.CqApi.CqCode_Image(Filename));
+            }
         }
     }
 }   

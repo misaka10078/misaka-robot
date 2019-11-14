@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Native.Csharp.App.Event
 {
@@ -26,6 +27,35 @@ namespace Native.Csharp.App.Event
 
         public static bool Trace_Enabled = true;
 
+        public static int[] Image_Group= new int[10];//存放图片组序号的参数
+        //0 狩猎 1 药酱
+        public static string[] Image_Group_Name= { "狩猎", "药水哥" };//存放各图片组名称的数组
+        public static string Root_Path;//存放程序根目录地址
+
+        public void Scan_Local_Image()
+        {
+            
+            for (int i =0; i< Image_Group_Name.Length; i++)
+            {
+                DirectoryInfo root = new DirectoryInfo(Root_Path + "\\data\\image\\"+ Image_Group_Name[i]);
+                Trace_Output(Image_Group_Name.Length.ToString());
+                FileInfo[] files = root.GetFiles();
+                Trace_Output(files.Length.ToString()+i);
+                Image_Group[i]=files.Length;//读取图片数量，储存
+                Trace_Output(root.ToString());
+            }
+            
+        }
+
+        public string Get_Image_Path(int Num)
+        {
+            Random R = new Random();
+            int a = R.Next(0, Image_Group[Num]-1);
+            DirectoryInfo root = new DirectoryInfo(Root_Path + "\\data\\image\\" + Image_Group_Name[Num]);
+            FileInfo[] files = root.GetFiles();
+            return Image_Group_Name[Num]+"\\"+files[a].Name;
+        }
+        
 
         public void Trace_Output(string Text)
         {
@@ -35,10 +65,6 @@ namespace Native.Csharp.App.Event
             }
             
         }//调试输出的函数
-        public void Shoulie_Image()
-        {
-
-        }
         public void Daliy_Fresh(int Days)
         {
             
