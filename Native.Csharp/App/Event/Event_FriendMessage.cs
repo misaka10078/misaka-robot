@@ -46,25 +46,9 @@ namespace Native.Csharp.App.Event
                     Common.CqApi.SendPrivateMessage(e.FromQQ, "调试模式已关闭");
                 }
             }
-            if (e.FromQQ == 403828602)
-            {
-                foreach (var cqMsg in CqMsg.Parse(e.Message).Contents)
-                {
-                    //取出CQ码中“file”参数的内容
-                    string file = cqMsg.Dictionary["file"];
 
-                    //如果“file”参数内容不是空的
-                    if (!string.IsNullOrEmpty(file))
-                    {
-                        //使用API将“cqimg”文件转换成图片文件，并返回图片文件路径
-                        string fileName = Common.CqApi.ReceiveImage(file);
 
-                        //将图片路径发送到群内
-                        Common.CqApi.SendGroupMessage(403828602, fileName);
-                    }
-                }     
-                
-            }
+ 
             //Common.CqApi.SendPrivateMessage(e.FromQQ, e.Message.ToString());
             //MessageBox.Show(e.Message.ToString());
 
