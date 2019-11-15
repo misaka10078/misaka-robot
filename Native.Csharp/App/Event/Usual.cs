@@ -34,7 +34,10 @@ namespace Native.Csharp.App.Event
 
         public void Scan_Local_Image()
         {
+            DirectoryInfo Root_Dir = new DirectoryInfo(Root_Path + "\\data\\image\\");
             
+
+
             for (int i =0; i< Image_Group_Name.Length; i++)
             {
                 DirectoryInfo root = new DirectoryInfo(Root_Path + "\\data\\image\\"+ Image_Group_Name[i]);
