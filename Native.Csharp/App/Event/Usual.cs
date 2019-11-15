@@ -13,10 +13,10 @@ namespace Native.Csharp.App.Event
     {
         public static DateTime Logdate;//此处记录上一次每日检查的时间，拿来对比和记录
 
-        public static long Test_GroupID = 262787331;//MBK群
-        public static long Test_MoneID = 2366325788;//moneQQ号
-        //public static long Test_GroupID=421773783;//测试群
-        //public static long Test_MoneID = 2824398891;//测试QQ号
+        //public static long Test_GroupID = 262787331;//MBK群
+        //public static long Test_MoneID = 2366325788;//moneQQ号
+        public static long Test_GroupID=421773783;//测试群
+        public static long Test_MoneID = 2824398891;//测试QQ号
 
         public static bool flag = false;
         public static int Change_Report_Language_Count = 0;
@@ -27,36 +27,45 @@ namespace Native.Csharp.App.Event
 
         public static bool Trace_Enabled = true;
 
-        public static int[] Image_Group= new int[10];//存放图片组序号的参数
+        public static int[] Image_Group;//存放图片组序号的参数
         //0 狩猎 1 药酱
-        public static string[] Image_Group_Name= { "狩猎", "药水哥" };//存放各图片组名称的数组
+        public static string[] Image_Group_Name;//存放各图片组名称的数组
         public static string Root_Path;//存放程序根目录地址
+        public static bool Input_Image=false;
+        public static string Image_Title = "";//存放添加图片的主题
 
         public void Scan_Local_Image()
         {
-            DirectoryInfo Root_Dir = new DirectoryInfo(Root_Path + "\\data\\image\\");
-            
+           
+                DirectoryInfo Root_Dir = new DirectoryInfo(Root_Path + "\\data\\image\\");
+                DirectoryInfo[] Dir_Name = Root_Dir.GetDirectories();//储存扫描获得的目录数组
+                Image_Group_Name = new string[Root_Dir.GetDirectories().Length];//初始化图像组名称储存数组的长度
+                Image_Group = new int[Root_Dir.GetDirectories().Length];//初始化图像数量数组的长度
+                for (int T = 0; T < Root_Dir.GetDirectories().Length; T++)
+                {
+                    Image_Group_Name[T] = Dir_Name[T].ToString();//将扫描获得的文件夹名称挨个放进图像组名称储存数组中
+                }
+                //此段代码扫描了image目录下的所有文件夹并储存为图像组的名称
 
-
-            for (int i =0; i< Image_Group_Name.Length; i++)
-            {
-                DirectoryInfo root = new DirectoryInfo(Root_Path + "\\data\\image\\"+ Image_Group_Name[i]);
-                Trace_Output(Image_Group_Name.Length.ToString());
-                FileInfo[] files = root.GetFiles();
-                Trace_Output(files.Length.ToString()+i);
-                Image_Group[i]=files.Length;//读取图片数量，储存
-                Trace_Output(root.ToString());
-            }
-            
+                for (int i = 0; i < Image_Group_Name.Length; i++)
+                {
+                    DirectoryInfo root = new DirectoryInfo(Root_Path + "\\data\\image\\" + Image_Group_Name[i]);                   
+                    FileInfo[] files = root.GetFiles();                   
+                    Image_Group[i] = files.Length;//读取图片数量，储存                    
+                }
+           
         }
 
         public string Get_Image_Path(int Num)
         {
-            Random R = new Random();
-            int a = R.Next(0, Image_Group[Num]-1);
-            DirectoryInfo root = new DirectoryInfo(Root_Path + "\\data\\image\\" + Image_Group_Name[Num]);
-            FileInfo[] files = root.GetFiles();
-            return Image_Group_Name[Num]+"\\"+files[a].Name;
+           
+                Random R = new Random();
+                int a = R.Next(0, Image_Group[Num] - 1);
+                DirectoryInfo root = new DirectoryInfo(Root_Path + "\\data\\image\\" + Image_Group_Name[Num]);
+                FileInfo[] files = root.GetFiles();
+                return Image_Group_Name[Num] + "\\" + files[a].Name;
+            
+            
         }
         
 

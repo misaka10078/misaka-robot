@@ -1,6 +1,7 @@
 ﻿using Native.Csharp.Sdk.Cqp.EventArgs;
 using Native.Csharp.Sdk.Cqp.Interface;
 using System;
+using System.Linq;
 namespace Native.Csharp.App.Event
 {
     public class Event_GroupMessage : IReceiveGroupMessage
@@ -44,18 +45,29 @@ namespace Native.Csharp.App.Event
             }
 
 
-
-            if (e.Message == "/狩猎")
+            foreach(string word in Usual.Image_Group_Name)
             {
-                string Filename = RealUsual.Get_Image_Path(0);
-                Common.CqApi.SendGroupMessage(e.FromGroup, Common.CqApi.CqCode_Image(Filename));
+                if (e.Message.Substring(1)==word)
+                {
+                    int GroupNum = Usual.Image_Group_Name.ToList().IndexOf(word);
+                    if (Usual.Image_Group[GroupNum] > 0)
+                    {
+                        string Filename = RealUsual.Get_Image_Path(GroupNum);  //查找当前关键词所在的数组索引                 
+                        Common.CqApi.SendGroupMessage(e.FromGroup, Common.CqApi.CqCode_Image(Filename));
+                    }
+                    else { Common.CqApi.SendGroupMessage(e.FromGroup, "当前图库中没有图片"); }
+                }
             }
 
-            if(e.Message == "/药水哥")
+            if (e.Message =="/图库列表")
             {
-                string Filename = RealUsual.Get_Image_Path(1);
-                Common.CqApi.SendGroupMessage(e.FromGroup, Common.CqApi.CqCode_Image(Filename));
+                string outlist="";
+                foreach(string list in Usual.Image_Group_Name)
+                {outlist = outlist + list + "\r\n";}
+                Common.CqApi.SendGroupMessage(e.FromGroup, "当前支持的图库列表是\r\n" + outlist+"\r\n发送/+图库名称获取对应图片");
             }
+
+           
         }
     }
 }   
