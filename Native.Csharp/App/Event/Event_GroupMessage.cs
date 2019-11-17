@@ -18,6 +18,11 @@ namespace Native.Csharp.App.Event
             {
                 RealUsual.Daliy_Fresh(outdt.Days);
             }
+            if(e.Message =="/功能一览")
+            {
+                Common.CqApi.SendGroupMessage(e.FromGroup, "催命BOT功能一览：\r\n/催命：催JK的命\r\n" +
+                    "/高考倒计时：显示高考倒计时\r\n我想被禁言XX小时：自助禁言功能\r\n/图库列表：显示当前支持图库");
+            }
 
             if(e.Message =="/更新ID")
             {
@@ -67,6 +72,10 @@ namespace Native.Csharp.App.Event
                 Common.CqApi.SendGroupMessage(e.FromGroup, "当前支持的图库列表是\r\n" + outlist+"\r\n发送/+图库名称获取对应图片");
             }
 
+            if (e.Message.Contains ("我想被禁言"))
+            {
+                RealUsual.BanSpeak(e.FromGroup, e.FromQQ, e.Message);
+            }
            
         }
     }

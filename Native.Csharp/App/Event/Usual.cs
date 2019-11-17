@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using System.Net;
 using System.IO;
 using System.Windows.Forms;
+using Native.Csharp.Sdk.Cqp;
+using Native.Csharp.Sdk.Cqp.Model;
+using Native.Csharp.Sdk.Cqp.Enum;
+
 
 namespace Native.Csharp.App.Event
 {
@@ -13,10 +17,10 @@ namespace Native.Csharp.App.Event
     {
         public static DateTime Logdate;//此处记录上一次每日检查的时间，拿来对比和记录
 
-        //public static long Test_GroupID = 262787331;//MBK群
-        //public static long Test_MoneID = 2366325788;//moneQQ号
-        public static long Test_GroupID=421773783;//测试群
-        public static long Test_MoneID = 2824398891;//测试QQ号
+        public static long Test_GroupID = 262787331;//MBK群
+        public static long Test_MoneID = 2366325788;//moneQQ号
+        //public static long Test_GroupID=421773783;//测试群
+        //public static long Test_MoneID = 2824398891;//测试QQ号
 
         public static bool flag = false;
         public static int Change_Report_Language_Count = 0;
@@ -101,6 +105,39 @@ namespace Native.Csharp.App.Event
             StreamReader sr = new StreamReader(resStream);
             string Word = sr.ReadToEnd();
             return Word;       
+        }
+
+        public void BanSpeak(long GroupID,long MemberID,String Message )
+        {
+            Double  GetTime = 0;
+            try
+            {
+                String m2 = Message.Substring(0, Message.Length - 2);
+                GetTime = Convert.ToDouble(m2.Substring(5));
+            }
+            catch
+            {
+                Common.CqApi.SendGroupMessage(GroupID, "禁言语法异常");
+                return;
+            }//判断命令格式并储存时间
+
+            
+            if (GetTime > 0&&GetTime <=720)
+            {
+                Double Bantime = Math.Round(GetTime * 3600);
+                GroupMemberInfo Info_Check = Common.CqApi.GetMemberInfo(GroupID, MemberID);
+                if (Info_Check.PermitType == PermitType.Manage|| Info_Check.PermitType == PermitType.Holder)
+                {
+                    Common.CqApi.SendGroupMessage(GroupID, "管理员或群主不能禁言哦~");
+                    return;
+                }//判断是否是管理员
+
+                Common.CqApi.SetGroupBanSpeak(GroupID, MemberID, TimeSpan.FromSeconds(Bantime));
+                Common.CqApi.SendGroupMessage(GroupID, Common.CqApi.CqCode_At(MemberID)+"已经被禁言了"+
+                    GetTime.ToString() + "小时");
+            }
+            else if (GetTime <= 0) { Common.CqApi.SendGroupMessage(GroupID, "禁言时间不能小于等于0"); return; }
+            else if (GetTime > 720) { Common.CqApi.SendGroupMessage(GroupID, "禁言时间不能大于30天"); return; }
         }
     }
 }
