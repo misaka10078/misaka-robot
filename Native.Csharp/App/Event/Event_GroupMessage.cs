@@ -21,7 +21,8 @@ namespace Native.Csharp.App.Event
             if(e.Message =="/功能一览")
             {
                 Common.CqApi.SendGroupMessage(e.FromGroup, "催命BOT功能一览：\r\n/催命：催JK的命\r\n" +
-                    "/高考倒计时：显示高考倒计时\r\n我想被禁言XX小时：自助禁言功能\r\n/图库列表：显示当前支持图库");
+                    "/高考倒计时：显示高考倒计时\r\n我想被禁言XX小时：自助禁言功能\r\n/图库列表：显示当前支持图库\r\n"
+                    + "\r\n竹竹搜图BOT指令一览：\r\n竹竹搜图：之后发送图片搜索来源\r\n竹竹来张<R18><关键词>色图：搜索对应关键词的色图");
             }
 
             if(e.Message =="/更新ID")
