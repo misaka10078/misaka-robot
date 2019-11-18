@@ -11,7 +11,7 @@ namespace Native.Csharp.App.Event
         {
             
             DateTime dt = DateTime.Now;
-            DateTime dtfinal = new DateTime(2020, 6, 7, 0, 0, 0);
+            DateTime dtfinal = new DateTime(2020, 6, 7, 9, 0, 0);
             TimeSpan outdt = dtfinal - dt;
             //
             if (Usual.Mone_ID_day > outdt.Days)
@@ -22,7 +22,9 @@ namespace Native.Csharp.App.Event
             {
                 Common.CqApi.SendGroupMessage(e.FromGroup, "催命BOT功能一览：\r\n/催命：催JK的命\r\n" +
                     "/高考倒计时：显示高考倒计时\r\n我想被禁言XX小时：自助禁言功能\r\n/图库列表：显示当前支持图库\r\n"
-                    + "\r\n竹竹搜图BOT指令一览：\r\n竹竹搜图：之后发送图片搜索来源\r\n竹竹来张<R18><关键词>色图：搜索对应关键词的色图");
+                    + "\r\n竹竹搜图BOT指令一览：\r\n竹竹搜图：之后发送图片搜索来源\r\n竹竹来张<R18><关键词>色图：搜索对应关键词的色图\r\n"+
+                    "详细指令地址可见https://github.com/Tsuk1ko/CQ-picfinder-robot/wiki/%E5%A6%82%E4%BD%95%E9%A3%9F%E7%94%A8\r\n\r\n"+
+                    "FF14塔塔露BOT：详见http://tataru.aoba.vip/help.php");
             }
 
             if(e.Message =="/更新ID")
