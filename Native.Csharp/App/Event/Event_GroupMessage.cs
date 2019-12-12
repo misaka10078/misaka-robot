@@ -2,6 +2,7 @@
 using Native.Csharp.Sdk.Cqp.Interface;
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 namespace Native.Csharp.App.Event
 {
     public class Event_GroupMessage : IReceiveGroupMessage
@@ -13,7 +14,7 @@ namespace Native.Csharp.App.Event
             DateTime dt = DateTime.Now;
             DateTime dtfinal = new DateTime(2020, 6, 7, 9, 0, 0);
             TimeSpan outdt = dtfinal - dt;
-            //
+            
             if (Usual.Mone_ID_day > outdt.Days)
             {
                 RealUsual.Daliy_Fresh(outdt.Days);
@@ -78,6 +79,10 @@ namespace Native.Csharp.App.Event
             if (e.Message.Contains ("我想被禁言"))
             {
                 RealUsual.BanSpeak(e.FromGroup, e.FromQQ, e.Message);
+            }
+            if(Regex.IsMatch(e.Message, @"想要被(禁言|经验)[0-9|一]*[(小时)|(分钟)|(天)]*") &&e.FromQQ==403828602)
+            {
+
             }
            
         }
