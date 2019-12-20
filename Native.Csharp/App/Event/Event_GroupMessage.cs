@@ -84,7 +84,9 @@ namespace Native.Csharp.App.Event
             {
 
             }
-           
+            Common.CqApi.SendGroupMessage(421773783, "结果"+RealUsual.GetAtID(e.Message));
+
+
         }
     }
 }   
