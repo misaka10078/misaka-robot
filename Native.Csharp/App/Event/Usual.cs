@@ -85,7 +85,7 @@ namespace Native.Csharp.App.Event
                 }
             }
             return "0";
-        }
+        }//这是获取AT的QQ的函数
         public void Trace_Output(string Text)
         {
             if(Trace_Enabled==true)
@@ -159,24 +159,29 @@ namespace Native.Csharp.App.Event
             int mult=0;//单位倍率
             try
             {
+                //Common.CqApi.SendGroupMessage(GroupID, "进入处理");
                 string PreOrder = Regex.Match(Message, @"被(禁言|经验)[0-9|一]*[(小时)|(分钟)|(天)]*").ToString();
-                if (PreOrder.Substring(3, 4) == "一")
+                //Common.CqApi.SendGroupMessage(GroupID, PreOrder);
+                if (PreOrder.Substring(3, 1) == "一")
                 { GetTime = 1; }
-                else { GetTime = Convert.ToDouble(Regex.Match(Message, @"(禁言|经验)[0-9|]*").ToString().Substring(2)); }//获取时间值 
-                    string multWord = Regex.Match(Message, @"[(小时)|(分钟)|(天)]*").ToString();//获取时间单位
+                else {GetTime = Convert.ToDouble(Regex.Match(Message, @"(禁言|经验)[0-9|]*").ToString().Substring(2)); }//获取时间值 
+                    string multWord = Regex.Match(Message, @"(小时)|(分钟)|天").ToString();//获取时间单位
                     if (multWord == "分钟")
-                    { mult = 0; }
+                    { mult = 1; }
                     else if (multWord == "小时")
                     { mult = 60; }
                     else if (multWord == "天")
                     { mult = 1440; }
-             }
+                    else { Common.CqApi.SendGroupMessage(GroupID, "时间单位获取失败，请检查"); }
+            }
             catch
             {
                 Common.CqApi.SendGroupMessage(GroupID, "禁言语法异常");
                 return;
             }
-            Double FinallTime = Math.Round(mult * GetTime * 60);//获取最终禁言秒数并取整处理
+            Double FinallTime = mult * GetTime * 60;//获取最终禁言秒数并取整处理
+
+
             if (FinallTime > 0 && FinallTime <= 62208000)
             {
                 GroupMemberInfo Info_Check = Common.CqApi.GetMemberInfo(GroupID, MemberID);
@@ -185,13 +190,12 @@ namespace Native.Csharp.App.Event
                     Common.CqApi.SendGroupMessage(GroupID, "管理员或群主不能禁言哦~");
                     return;
                 }//判断是否是管理员
-
                 Common.CqApi.SetGroupBanSpeak(GroupID, MemberID, TimeSpan.FromSeconds(FinallTime));
-                Common.CqApi.SendGroupMessage(GroupID, Common.CqApi.CqCode_At(MemberID)+"已经被禁言了"+
-                    GetTime.ToString() + "小时");
+                Common.CqApi.SendGroupMessage(GroupID, Common.CqApi.CqCode_At(MemberID)+"有罪！处刑！");
             }
-            else if (GetTime <= 0) { Common.CqApi.SendGroupMessage(GroupID, "禁言时间不能小于等于0"); return; }
-            else if (GetTime > 720) { Common.CqApi.SendGroupMessage(GroupID, "禁言时间不能大于30天"); return; }
+            else if (FinallTime <= 0) { Common.CqApi.SendGroupMessage(GroupID, "禁言时间不能小于等于0"); return; }
+            else if (FinallTime > 62208000) { Common.CqApi.SendGroupMessage(GroupID, "禁言时间不能大于30天"); return; }
+            else { Common.CqApi.SendGroupMessage(GroupID, "发生未知错误"); }
             
         }
 
